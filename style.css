@@ -2,7 +2,8 @@
 body, html {
     margin: 0;
     padding: 0;
-    overflow-y: auto;
+    /* CAMBIO: Permitimos el scroll vertical si el contenido es muy largo */
+    overflow-y: auto; 
     height: 100%;
     width: 100%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -25,6 +26,7 @@ body, html {
     padding: 4rem 2rem;
     background-color: rgba(0, 0, 0, 0.5);
     min-height: 100vh;
+    box-sizing: border-box; /* Evita que el padding sume altura extra indeseada */
 }
 
 h1 {
@@ -42,19 +44,23 @@ h1 {
 
 .image-container {
     position: relative;
-    max-width: 600px;
+    max-width: 1980px; /* Aumentado de 600px a 800px para que el formato 16:9 luzca mejor */
     margin: auto;
     overflow: hidden;
+    background-color: #000; /* Fondo negro por si quedan márgenes libres */
 }
 
-.image-container img {
-    width: 100%;
+.hero-video {
+    width: 100%;           /* El video se adaptará al ancho del contenedor */
+    height: auto;          /* La altura se calculará automáticamente */
+    aspect-ratio: 16 / 9;  /* CAMBIO: Forzamos la proporción panorámica 16:9 */
+    display: block;        
+    object-fit: contain;   /* Asegura que el video entero encaje sin recortarse */
     opacity: 0.9;
-    mask-image: linear-gradient(to right, transparent, black 30%, black 70%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 30%, black 70%, transparent);
     transition: transform 0.4s ease-in-out;
 }
 
-.image-container img:hover {
+/* El efecto hover se mantiene igual */
+.hero-video:hover {
     transform: scale(1.05);
 }
